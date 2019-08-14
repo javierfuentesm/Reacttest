@@ -1,12 +1,15 @@
-import * as ActionTypes from "./ActionTypes";
+  import * as ActionTypes from "./ActionTypes";
 import { baseUrl } from "../shared/baseUrl";
 
 
-export const addPost= comment => ({
+export const addPost= (title,body) => ({
     type: ActionTypes.ADD_POST,
-    payload: comment
+    payload: {
+      title:title,
+      body:body
+    }
   });
-  
+
 
 export const postsFailed = errmess => ({
     type: ActionTypes.POSTS_FAILED,
@@ -50,3 +53,4 @@ export const fetchPosts = () => (dispatch) => {
       .then(posts => dispatch(addPosts(posts)))
       .catch(error => dispatch(postsFailed(error.message)));
   };
+

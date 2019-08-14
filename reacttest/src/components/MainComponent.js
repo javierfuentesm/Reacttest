@@ -6,11 +6,10 @@ import NewPost from "./NewPostComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
-    addPost,
-    postsFailed,
-    addPosts,
-  fetchPosts,
-  
+  addPost,
+  postsFailed,
+  addPosts,
+  fetchPosts
 } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
@@ -22,23 +21,20 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = dispatch => ({
- 
   fetchPosts: () => {
     dispatch(fetchPosts());
   },
+  addPost: (title, body) => dispatch(addPost(title, body)),
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
-  },
+  }
 });
 
 class Main extends React.Component {
   componentDidMount() {
     this.props.fetchPosts();
- 
   }
   render() {
-    
-
     return (
       <div>
         <Header />
@@ -49,7 +45,6 @@ class Main extends React.Component {
             timeout={300}
           >
             <Switch>
-             
               <Route
                 exact
                 path="/post"
@@ -59,8 +54,9 @@ class Main extends React.Component {
                 exact
                 path="/newpost"
                 component={() => (
-                  <NewPost resetFeedbackForm={this.props.resetFeedbackForm} 
-                  postFeedback={this.props.postFeedback}
+                  <NewPost
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                    addPost={this.props.addPost}
                   />
                 )}
               />

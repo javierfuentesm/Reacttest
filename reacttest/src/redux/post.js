@@ -31,8 +31,11 @@ export const Posts = (
 
       case ActionTypes.ADD_POST:
       var post = action.payload;
-      return {...state,posts:state.comments.concat(post)};
-    
+      post.id=  state.posts.length;
+      post.userId="10";
+      return {...state,posts:state.posts.concat(post)};
+
+      
 
     default:
       return state;
