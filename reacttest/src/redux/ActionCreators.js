@@ -54,3 +54,10 @@ export const fetchPosts = () => (dispatch) => {
       .catch(error => dispatch(postsFailed(error.message)));
   };
 
+
+  export const deletePost= (id) => ({
+    type: ActionTypes.DELETE_POST,
+    payload: {
+      id:id
+    }
+  });

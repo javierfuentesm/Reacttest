@@ -1,7 +1,8 @@
 import React from "react";
 import {
-  Breadcrumb,
-  BreadcrumbItem,
+  Modal,
+  ModalBody,
+  ModalHeader,
   Button,
   Label,
   Col,
@@ -16,25 +17,34 @@ const minlength = len => val => val && val.length >= len;
 class NewPost extends React.Component {
   constructor(props) {
     super(props);
+    
+    this.state = {
+      isModalOpen: false
+    };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   handleSubmit(values) {
     //console.log("Current state is" + JSON.stringify(values));
     alert("Current state is" + JSON.stringify(values));
     this.props.resetFeedbackForm();
-    this.props.addPost(
-      values.title,
-      values.body
-    );
+    this.props.addPost(values.title, values.body);
+  }
+
+  toggleModal() {
+    this.setState({
+      isModalOpen: !this.state.isModalOpen
+    });
   }
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-12 col-md-9">
+      <div>
+        <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
+          <ModalHeader>Añadir nuevo Post</ModalHeader>
+          <ModalBody>
             <Form
               model="feedback"
               onSubmit={values => this.handleSubmit(values)}
@@ -105,8 +115,13 @@ class NewPost extends React.Component {
                 </Button>
               </Row>
             </Form>
-          </div>
-        </div>
+          </ModalBody>
+        </Modal>
+
+        <Button outline onClick={this.toggleModal}>
+          <span className="fa fa-sign-in fa-lg" />
+          Añadir un nuevo Post 
+        </Button>
       </div>
     );
   }

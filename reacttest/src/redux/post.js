@@ -1,5 +1,5 @@
 import * as ActionTypes from "./ActionTypes";
-
+import { statement } from "@babel/template";
 
 export const Posts = (
   state = {
@@ -29,13 +29,20 @@ export const Posts = (
         posts: []
       };
 
-      case ActionTypes.ADD_POST:
+    case ActionTypes.ADD_POST:
       var post = action.payload;
-      post.id=  state.posts.length;
-      post.userId="10";
-      return {...state,posts:state.posts.concat(post)};
+      post.id = state.posts.length;
+      post.userId = "10";
+      return { ...state, posts: state.posts.concat(post) };
 
-      
+    case ActionTypes.DELETE_POST:
+      var postdelete = action.payload;
+      return {
+       
+        isLoading: false,
+        errMess: null,
+        posts: state.posts.filter((post)=>post.id !== postdelete.id)
+      };
 
     default:
       return state;
