@@ -1,5 +1,4 @@
 import * as ActionTypes from "./ActionTypes";
-import { statement } from "@babel/template";
 
 export const Posts = (
   state = {
