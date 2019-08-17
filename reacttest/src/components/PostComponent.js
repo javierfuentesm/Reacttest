@@ -23,7 +23,7 @@ function Post(props) {
             {props.posts.posts.map(post => {
               return (
                 <Fade in>
-                  <Media tag="li">
+                  <Media id={post.id} tag="li">
                     <Media body className="ml-5">
                       <Media heading>{post.title}</Media>
                       <p>{post.body} </p>

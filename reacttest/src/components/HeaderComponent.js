@@ -74,7 +74,7 @@ class Header extends React.Component {
               <div className="col-12 col-sm-6">
                 <h1>Posts para Edteam</h1>
                 <p>
-                  Prueba para lata edición y eliminación de posts
+                  Prueba para alta, edición y eliminación de posts
                 </p>
               </div>
             </div>
