@@ -27,7 +27,6 @@ class NewPost extends React.Component {
   }
 
   handleSubmit(values) {
-    //console.log("Current state is" + JSON.stringify(values));
     alert("Current state is" + JSON.stringify(values));
     this.props.resetFeedbackForm();
     this.props.addPost(values.title, values.body);
@@ -42,6 +41,7 @@ class NewPost extends React.Component {
   render() {
     return (
       <div>
+        
         <Modal isOpen={this.state.isModalOpen} toggle={this.toggleModal}>
           <ModalHeader>Añadir nuevo Post</ModalHeader>
           <ModalBody>
@@ -80,7 +80,7 @@ class NewPost extends React.Component {
               </Row>
               <Row className="form-group">
                 <Label htmlFor="body" md={2}>
-                  Last Name
+                 Cuerpo
                 </Label>
                 <Col md={10}>
                   <Control.text

@@ -8,8 +8,7 @@ import { connect } from "react-redux";
 import {
   addPost,
   deletePost,
-  postsFailed,
-  addPosts,
+  editPost,  
   fetchPosts
 } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
@@ -26,7 +25,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchPosts());
   },
   addPost: (title, body) => dispatch(addPost(title, body)),
-  deletePost: (id) => dispatch(deletePost(id)),
+  editPost: (id) => dispatch(editPost(id)),
+  deletePost: id => dispatch(deletePost(id)),
 
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
@@ -51,18 +51,18 @@ class Main extends React.Component {
               <Route
                 exact
                 path="/post"
-                component={() => <Post posts={this.props.posts}  resetFeedbackForm={this.props.resetFeedbackForm} addPost={this.props.addPost} deletePost={this.props.deletePost}
-                />}
-              />
-              <Route
-                exact
-                path="/newpost"
                 component={() => (
-                  <NewPost
-                   
+                  <Post
+                    posts={this.props.posts}
+                    resetFeedbackForm={this.props.resetFeedbackForm}
+                    addPost={this.props.addPost}
+                    deletePost={this.props.deletePost}
+                    editPost={this.props.editPost}
+
                   />
                 )}
               />
+              <Route exact path="/newpost" component={() => <NewPost />} />
               <Redirect to="/post" />
             </Switch>
           </CSSTransition>

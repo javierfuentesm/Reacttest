@@ -31,7 +31,14 @@ function Post(props) {
                         onClick={e => props.deletePost(post.id)}
                         className="btn btn-danger"
                       >
-                        Remove
+                        Eliminar
+                      </button>
+
+                      <button
+                        onClick={e => props.editPost(post.id)}
+                        className="btn btn-warning"
+                      >
+                        Editar
                       </button>
                     </Media>
                   </Media>

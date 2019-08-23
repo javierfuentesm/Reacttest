@@ -6,7 +6,8 @@ export const addPost= (title,body) => ({
     type: ActionTypes.ADD_POST,
     payload: {
       title:title,
-      body:body
+      body:body,
+      editing:false
     }
   });
 
@@ -16,9 +17,9 @@ export const postsFailed = errmess => ({
     payload: errmess
   });
   
-  export const addPosts = comments => ({
+  export const addPosts = posts => ({
     type: ActionTypes.ADD_POSTS,
-    payload: comments
+    payload: posts
   });
   
   
@@ -57,6 +58,13 @@ export const fetchPosts = () => (dispatch) => {
 
   export const deletePost= (id) => ({
     type: ActionTypes.DELETE_POST,
+    payload: {
+      id:id
+    }
+  });
+
+  export const editPost= (id) => ({
+    type: ActionTypes.EDIT_POST,
     payload: {
       id:id
     }
