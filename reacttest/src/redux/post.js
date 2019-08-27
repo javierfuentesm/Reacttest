@@ -5,21 +5,16 @@ export const Posts = (
     isLoading: true,
     errMess: null,
     posts: [],
-    edit:[]
+    edit: []
   },
   action
 ) => {
   switch (action.type) {
     case ActionTypes.ADD_POSTS:
-       
-     var posts =action.payload.map(post => {
-         post.editing =false;
-         return post;
-
+      var posts = action.payload.map(post => {
+        post.editing = false;
+        return post;
       });
-
-
-
       return {
         ...state,
         isLoading: false,
@@ -47,21 +42,29 @@ export const Posts = (
     case ActionTypes.DELETE_POST:
       var postdelete = action.payload;
       return {
-       
         isLoading: false,
         errMess: null,
-        posts: state.posts.filter((post)=>post.id !== postdelete.id)
+        posts: state.posts.filter(post => post.id !== postdelete.id)
       };
 
-      case ActionTypes.EDIT_POST:
-        return {
-         
-          isLoading: false,
-          errMess: null,
-          posts:state.posts.map((post)=>post.id === action.id ? {...post,editing:!post.editing}:post)
+    case ActionTypes.EDIT_POST:
+      var postedit = action.payload;
 
-        };
+      return{
 
+        posts:state.posts.map(post => {
+          if (post.id === postedit.id) {
+            return {
+              ...post,
+              title: postedit.title,
+              body: postedit.body,
+              editing: !post.editing
+            };
+          } else return post;
+        })
+  
+      } ;
+      
     default:
       return state;
   }

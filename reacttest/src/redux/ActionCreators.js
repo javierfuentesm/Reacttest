@@ -63,9 +63,7 @@ export const fetchPosts = () => (dispatch) => {
     }
   });
 
-  export const editPost= (id) => ({
+  export const editPost= (post) => ({
     type: ActionTypes.EDIT_POST,
-    payload: {
-      id:id
-    }
+    payload: post
   });

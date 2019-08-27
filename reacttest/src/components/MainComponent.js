@@ -2,7 +2,6 @@ import React from "react";
 import Post from "./PostComponent";
 import Header from "./HeaderComponent";
 import Footer from "./FooterComponent";
-import NewPost from "./NewPostComponent";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import {
@@ -30,7 +29,12 @@ const mapDispatchToProps = dispatch => ({
 
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
+  },
+  changeFeedbackForm:(post)=>{
+    dispatch(actions.change('feedback', post))
+
   }
+
 });
 
 class Main extends React.Component {
@@ -55,6 +59,7 @@ class Main extends React.Component {
                   <Post
                     posts={this.props.posts}
                     resetFeedbackForm={this.props.resetFeedbackForm}
+                    changeFeedbackForm={this.props.changeFeedbackForm}
                     addPost={this.props.addPost}
                     deletePost={this.props.deletePost}
                     editPost={this.props.editPost}
@@ -62,7 +67,6 @@ class Main extends React.Component {
                   />
                 )}
               />
-              <Route exact path="/newpost" component={() => <NewPost />} />
               <Redirect to="/post" />
             </Switch>
           </CSSTransition>
