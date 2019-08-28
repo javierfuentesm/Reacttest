@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Media,
-  Button,
-  Label,
-  Col,
-  Row
-} from "reactstrap";
+import { Media, Button, Label, Col, Row } from "reactstrap";
 import { Fade, Stagger } from "react-animation-components";
 
 import { Control, Form, Errors } from "react-redux-form";
@@ -28,22 +22,18 @@ class Post extends React.Component {
   handleSubmit(values) {
     alert("Current state is" + JSON.stringify(values));
 
-    if(values.id!=null){
+    if (values.id == "") {
+      this.props.resetFeedbackForm();
+      this.props.addPost(values.title, values.body);
+      alert("Tu entrada fue agregada con exito" );
+
+    } else {
       this.props.resetFeedbackForm();
       this.props.editPost(values);
-
-
-
-    }
-    else{
-      this.props.resetFeedbackForm();
-
-      this.props.addPost(values.title, values.body);
+      alert("Tu entrada fue editada con exito" );
 
     }
   }
-
- 
 
   render() {
     return (
@@ -134,7 +124,9 @@ class Post extends React.Component {
                         </button>
 
                         <button
-                          onClick={e =>{ this.props.changeFeedbackForm(post); }}
+                          onClick={e => {
+                            this.props.changeFeedbackForm(post);
+                          }}
                           className="btn btn-warning"
                         >
                           Editar
