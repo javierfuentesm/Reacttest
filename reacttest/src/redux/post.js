@@ -1,21 +1,25 @@
 import * as ActionTypes from "./ActionTypes";
 
-
 export const Posts = (
   state = {
     isLoading: true,
     errMess: null,
-    posts: []
+    posts: [],
+    edit: []
   },
   action
 ) => {
   switch (action.type) {
     case ActionTypes.ADD_POSTS:
+      var posts = action.payload.map(post => {
+        post.editing = false;
+        return post;
+      });
       return {
         ...state,
         isLoading: false,
         errMess: null,
-        posts: action.payload
+        posts: posts
       };
 
     case ActionTypes.POSTS_LOADING:
@@ -29,14 +33,38 @@ export const Posts = (
         posts: []
       };
 
-      case ActionTypes.ADD_POST:
+    case ActionTypes.ADD_POST:
       var post = action.payload;
-      post.id=  state.posts.length;
-      post.userId="10";
-      return {...state,posts:state.posts.concat(post)};
+      post.id = state.posts.length;
+      post.userId = "10";
+      return { ...state, posts: state.posts.concat(post) };
 
+    case ActionTypes.DELETE_POST:
+      var postdelete = action.payload;
+      return {
+        isLoading: false,
+        errMess: null,
+        posts: state.posts.filter(post => post.id !== postdelete.id)
+      };
+
+    case ActionTypes.EDIT_POST:
+      var postedit = action.payload;
+
+      return{
+
+        posts:state.posts.map(post => {
+          if (post.id === postedit.id) {
+            return {
+              ...post,
+              title: postedit.title,
+              body: postedit.body,
+              editing: !post.editing
+            };
+          } else return post;
+        })
+  
+      } ;
       
-
     default:
       return state;
   }
