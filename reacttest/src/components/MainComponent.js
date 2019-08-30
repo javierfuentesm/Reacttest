@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import {
   addPost,
   deletePost,
-  editPost,  
+  editPost,
   fetchPosts
 } from "../redux/ActionCreators";
 import { actions } from "react-redux-form";
@@ -24,17 +24,15 @@ const mapDispatchToProps = dispatch => ({
     dispatch(fetchPosts());
   },
   addPost: (title, body) => dispatch(addPost(title, body)),
-  editPost: (id) => dispatch(editPost(id)),
+  editPost: id => dispatch(editPost(id)),
   deletePost: id => dispatch(deletePost(id)),
 
   resetFeedbackForm: () => {
     dispatch(actions.reset("feedback"));
   },
-  changeFeedbackForm:(post)=>{
-    dispatch(actions.change('feedback', post))
-
+  changeFeedbackForm: post => {
+    dispatch(actions.change("feedback", post));
   }
-
 });
 
 class Main extends React.Component {
@@ -63,7 +61,6 @@ class Main extends React.Component {
                     addPost={this.props.addPost}
                     deletePost={this.props.deletePost}
                     editPost={this.props.editPost}
-
                   />
                 )}
               />

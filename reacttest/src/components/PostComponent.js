@@ -4,6 +4,7 @@ import { Fade, Stagger } from "react-animation-components";
 
 import { Control, Form, Errors } from "react-redux-form";
 
+//Validaciones para el formulario
 const required = val => val && val.length;
 const maxlength = len => val => !val || val.length <= len;
 const minlength = len => val => val && val.length >= len;
@@ -12,26 +13,21 @@ class Post extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isModalOpen: false
-    };
-
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(values) {
-    alert("Current state is" + JSON.stringify(values));
-
-    if (values.id == "") {
+    //Cuando se haga click en guardar que es un submit
+    //Vamos a valdiar si el id del form feedback esta vacio quiere decir que la accion a ejecutar es la de añadir
+    //Si el form de feedback tiene un id asignado quiere decir que se dio click a algun boton de editar y cargo la informacion de ese post por lo cual la accion a ejecutar debera ser la de editar y no crear
+    if (values.id === "") {
       this.props.resetFeedbackForm();
       this.props.addPost(values.title, values.body);
-      alert("Tu entrada fue agregada con exito" );
-
+      alert("Tu entrada fue agregada con exito");
     } else {
       this.props.resetFeedbackForm();
       this.props.editPost(values);
-      alert("Tu entrada fue editada con exito" );
-
+      alert("Tu entrada fue editada con exito");
     }
   }
 
@@ -54,7 +50,7 @@ class Post extends React.Component {
                   validators={{
                     required,
                     minlength: minlength(3),
-                    maxlength: maxlength(15)
+                    maxlength: maxlength(50)
                   }}
                 />
                 <Errors
@@ -62,9 +58,9 @@ class Post extends React.Component {
                   model=".title"
                   show="touched"
                   messages={{
-                    required: "Required",
-                    minlength: "Must be greater than 2 chaaracters",
-                    maxlength: "Must  BE 15 CHARACTERS OR LESS"
+                    required: "Requerido",
+                    minlength: "Debe tener al menos 2 caracteres",
+                    maxlength: "Debe tener 50 caracteres o menos "
                   }}
                 />
               </Col>
@@ -83,7 +79,7 @@ class Post extends React.Component {
                   validators={{
                     required,
                     minlength: minlength(3),
-                    maxlength: maxlength(15)
+                    maxlength: maxlength(50)
                   }}
                 />
 
@@ -92,9 +88,9 @@ class Post extends React.Component {
                   model=".body"
                   show="touched"
                   messages={{
-                    required: "Required",
-                    minlength: "Must be greater than 2 chaaracters",
-                    maxlength: "Must  BE 15 CHARACTERS OR LESS"
+                    required: "Requerido",
+                    minlength: "Debe tener al menos 2 caracteres",
+                    maxlength: "Debe tener 50 caracteres o menos "
                   }}
                 />
               </Col>
@@ -121,8 +117,7 @@ class Post extends React.Component {
                           className="btn btn-danger"
                         >
                           Eliminar
-                        </button>
-
+                        </button>{" "}
                         <button
                           onClick={e => {
                             this.props.changeFeedbackForm(post);

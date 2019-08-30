@@ -5,3 +5,4 @@ export const InitialFeedback={
     body:''
    
 }
+//Estado inicial del formulario
